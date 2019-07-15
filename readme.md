@@ -5,6 +5,7 @@
 <a href="https://packagist.org/packages/laravel/framework"><img src="https://poser.pugx.org/laravel/framework/v/stable.svg" alt="Latest Stable Version"></a>
 <a href="https://packagist.org/packages/laravel/framework"><img src="https://poser.pugx.org/laravel/framework/license.svg" alt="License"></a>
 </p>
+
 ## 为什么要开发Ntwlyz?
 最近有个朋友想要写一套这样功能的网络验证系统但他不会Web开发，我近期也有空闲时间，帮他完成了。后续我也会对该项目于进行更新以达到符合更多人的需求。
 
@@ -37,6 +38,7 @@
 2. 充值卡列表
 3. 试用功能，可自定义试用的周期或关闭试用。
 4. 充值卡批量生成。
+
 。。。。
 
 ## 有问题反馈
