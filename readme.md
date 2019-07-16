@@ -6,7 +6,7 @@
 <a href="https://packagist.org/packages/laravel/framework"><img src="https://poser.pugx.org/laravel/framework/license.svg" alt="License"></a>
 </p>
 
-## 为什么要开发Ntwlyz?
+## 为什么要开发Ntwlyz
 最近有个朋友想要写一套这样功能的网络验证系统但他不会Web开发，我近期也有空闲时间，帮他完成了。后续我也会对该项目于进行更新以达到符合更多人的需求。
 
 ## Ntwlyz的开发环境
@@ -15,7 +15,7 @@
 3. MySQL 5.5.53
 4. Windows 10 Pro 1803
 
-## Ntwlyz后续计划？
+## Ntwlyz后续计划
 
 * 安全的`动态加解密`技术
     * 近期有空就会加入这个，对于网络验证而言数据交互之间的加密还是必须要有滴。
