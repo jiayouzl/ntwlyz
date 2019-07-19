@@ -75,8 +75,10 @@ class KeyLoginController extends Controller
 			$enddate = $ret -> enddate;
 			if ($enddate > Carbon ::now()) {
 				$arr = [
-					'code' => 1000,
-					'msg'  => '验证成功，到期时间：'.$enddate
+					'code'  => 1000,
+					'msg'   => '验证成功，到期时间：'.$enddate,
+					'banben'=>$setting->banben,
+					'dll'   =>$setting->dlldown
 				];
 				return $arr;
 			} else {

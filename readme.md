@@ -11,7 +11,7 @@
 
 ## Ntwlyz的开发环境
 1. PHP 7.1.30
-2. Laraver5.8.28（最低需要PHP7.1.3）
+2. Laraver5.8.29（最低需要PHP7.1.3）
 3. MySQL 5.5.53
 4. Windows 10 Pro 1803
 
@@ -25,8 +25,8 @@
 
 ## 安装说明
 1. 自行导入NTSQL文件夹中的data.sql文件到MySQL。
-2. 自行修改根目录中.env.example中的配置后改名.env。(修改APP_URL与Mysql连接配置)
-3. 执行composer install安装所需插件包。
+2. 自行修改根目录中.env.example中的配置后改名.env。(修改APP_URL与MySQL连接配置)
+3. 执行composer install安装所需扩展包。
 4. Nginx需将运行目录设置至public目录。
 
 ## 接口说明
