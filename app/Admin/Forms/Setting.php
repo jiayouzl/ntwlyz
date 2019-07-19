@@ -46,7 +46,7 @@ class Setting extends Form
 				//$files = Storage::allFiles('public');
 				//$files = Storage::disk('public')->allFiles();
 				Storage ::disk(config('admin.upload.disk')) -> put(config('admin.upload.directory.file') . '/' . $clientName, file_get_contents($path));
-				$getupname = Storage ::disk(config('admin.upload.disk')) -> url(config('admin.upload.directory.file') . '/' . $clientName);
+				$getupname = Storage ::disk(config('admin.upload.disk')) ->url(config('admin.upload.directory.file') . '/' . $clientName);
 			}
 		}
 
