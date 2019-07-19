@@ -14,9 +14,11 @@ class CreateSettingTable extends Migration
     public function up()
     {
         Schema::create('setting', function (Blueprint $table) {
-            $table->bigIncrements('id');
-	        $table->integer('shifoushiyong',false,true);
-	        $table->integer('time',false,true);
+            $table->bigIncrements('id')->comment('自增ID');
+	        $table->integer('shifoushiyong',false,true)->comment('是否开启试用')->nullable();
+	        $table->integer('time',false,true)->comment('试用时间(秒)')->nullable();
+	        $table->string('banben')->comment('软件版本')->nullable();
+	        $table->string('dlldown')->comment('DLL路径')->nullable();
         });
     }
 
