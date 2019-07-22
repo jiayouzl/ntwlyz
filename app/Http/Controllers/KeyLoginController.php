@@ -10,6 +10,16 @@ use Illuminate\Support\Facades\DB;
 
 class KeyLoginController extends Controller
 {
+	//加密方法
+	private function jiami($arr = array(), $key)
+	{
+		//将数组已JSON编码,不然数组不支持直接加密
+		$val = json_encode($arr);
+		//test参数设置为false为全局不加密,方便调试.
+		$ret = authcode_leilei($val, 'ENCODE', $key, 88888, false);
+		return $ret;
+	}
+
 	/*
 	 * 错误码说明
 	 * 1000 用户未过期验证通过
@@ -37,7 +47,7 @@ class KeyLoginController extends Controller
 			];
 		}
 		//取系统设置(先读缓存)
-		$setting = Cache::remember('setting', 5, function() {
+		$setting = Cache ::remember('setting', 5, function () {
 			return DB ::table('setting') -> where('id', 1) -> first();
 		});
 
@@ -47,45 +57,45 @@ class KeyLoginController extends Controller
 			$db -> key     = $request -> key;
 			$db -> ip      = getIpPlace(get_client_ip());
 			$db -> regdate = Carbon ::now() -> toDateString();
-			if ($setting->shifoushiyong == '1') {
-				$enddate = Carbon ::now() -> addSeconds($setting->time);//到期时间后面为当前时间+秒
+			if ($setting -> shifoushiyong == '1') {
+				$enddate = Carbon ::now() -> addSeconds($setting -> time);//到期时间后面为当前时间+秒
 			} else {
 				$enddate = Carbon ::now();//没有试用就写入当前时间.
 			}
 			$db -> enddate = $enddate;
 			$result        = $db -> save();
-			if ($setting->shifoushiyong =='1'){
-				return $result ? [
+			if ($setting -> shifoushiyong == '1') {
+				return $result ? $this -> jiami([
 					'code' => 1001,
-					'msg'  => '注册成功，到期时间：'.$enddate
-				] : [
+					'msg'  => '注册成功，到期时间：' . $enddate
+				], $request -> key) : $this -> jiami([
 					'code' => 2001,
 					'msg'  => '注册失败，请与管理员取得联系。'
-				];
-			}else{
-				return $result ? [
+				], $request -> key);
+			} else {
+				return $result ? $this -> jiami([
 					'code' => 1001,
 					'msg'  => '注册成功，请充值后继续使用。'
-				] : [
+				], $request -> key) : $this -> jiami([
 					'code' => 2001,
 					'msg'  => '注册失败，请与管理员取得联系。'
-				];
+				], $request -> key);
 			}
 		} else {
 			$enddate = $ret -> enddate;
 			if ($enddate > Carbon ::now()) {
-				$arr = [
-					'code'  => 1000,
-					'msg'   => '验证成功，到期时间：'.$enddate,
-					'banben'=>$setting->banben,
-					'dll'   =>$setting->dlldown
-				];
+				$arr = $this -> jiami([
+					'code'   => 1000,
+					'msg'    => '验证成功，到期时间：' . $enddate,
+					'banben' => $setting -> banben,
+					'dll'    => $setting -> dlldown
+				], $request -> key);
 				return $arr;
 			} else {
-				$arr = [
+				$arr = $this -> jiami([
 					'code' => 2000,
 					'msg'  => '已到期请充值后继续使用。'
-				];
+				], $request -> key);
 				return $arr;
 			}
 		}
