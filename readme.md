@@ -1,4 +1,4 @@
-![LOGO](http://tva1.sinaimg.cn/large/0060lm7Tly1g5a7zy2lphj30sg0e07b2.jpg)
+<p align="center"><img src="http://tva1.sinaimg.cn/large/0060lm7Tly1g5a7zy2lphj30sg0e07b2.jpg"></p>
 
 ## 为什么要开发Ntwlyz
 最近有个朋友想要写一套这样功能的网络验证系统但他不会Web开发，我近期也有空闲时间，帮他完成了。后续我也会对该项目于进行更新以达到符合更多人的需求。
