@@ -2,6 +2,7 @@
 
 namespace Tests\Feature;
 
+use App\UserData;
 use Tests\TestCase;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 
@@ -29,6 +30,12 @@ class ExampleTest extends TestCase
 		dump('加密后:'.$ret);
 		$ret = authcode_leilei($ret,'DECODE','china');
 		dump('解密后:'.$ret);
+		$this->assertTrue(true);
+	}
+
+	public function testguanlian(){
+		$loginlog = UserData::find(1)->loginlog;
+		dump($loginlog);
 		$this->assertTrue(true);
 	}
 }

@@ -301,3 +301,19 @@ CREATE TABLE `user_data` (
 -- ----------------------------
 -- Records of user_data
 -- ----------------------------
+
+-- ----------------------------
+-- Table structure for login_logs
+-- ----------------------------
+DROP TABLE IF EXISTS `login_logs`;
+CREATE TABLE `login_logs` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `user_id` int(10) unsigned NOT NULL COMMENT '用户ID',
+  `ip` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL COMMENT 'ip地址',
+  `logindate` datetime NOT NULL COMMENT '登录时间',
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM AUTO_INCREMENT=1 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- ----------------------------
+-- Records of login_logs
+-- ----------------------------

@@ -1,17 +1,11 @@
-<p align="center"><img src="https://laravel.com/assets/img/components/logo-laravel.svg"></p>
-<p align="center">
-<a href="https://travis-ci.org/laravel/framework"><img src="https://travis-ci.org/laravel/framework.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://poser.pugx.org/laravel/framework/d/total.svg" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://poser.pugx.org/laravel/framework/v/stable.svg" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://poser.pugx.org/laravel/framework/license.svg" alt="License"></a>
-</p>
+<p align="center"><img src="http://down.25531.com/image/ntwlyzlogo.png"></p>
 
 ## 为什么要开发Ntwlyz
 最近有个朋友想要写一套这样功能的网络验证系统但他不会Web开发，我近期也有空闲时间，帮他完成了。后续我也会对该项目于进行更新以达到符合更多人的需求。
 
 ## Ntwlyz的开发环境
 1. PHP 7.1.30
-2. Laraver5.8.29（最低需要PHP7.1.3）
+2. Laravel 5.8.29（最低需要PHP7.1.3）
 3. MySQL 5.5.53
 4. Windows 10 Pro 1803
 
@@ -21,7 +15,7 @@
     * 近期有空就会加入这个，对于网络验证而言数据交互之间的加密还是必须要有滴。
 * ~~远程载入功能代码。~~(已完成)
 	* 将重要代码以DLL动态链接库形式编译，将其上传至服务器，通过内存加载的方式调用远程DLL中的函数，从而达到代码分离的效果，为防破解添加一道防护。
-* 欢迎所有`Laraver`爱好者一起充实它。
+* 欢迎所有`Laravel`爱好者一起充实它。
 
 ## 安装说明
 1. 自行导入NTSQL文件夹中的data.sql文件到MySQL。
@@ -40,6 +34,7 @@
 `http://127.0.0.1:8000/admin`
 
 ## 返回码说明
+
 * 1000 用户未过期验证通过
 * 1001 新用户注册成功
 * 1002 充值成功
@@ -55,7 +50,12 @@
 
 ## 更新日志
 
-更新内容(2019年7月21日)     v1.20
+更新内容(2019年7月23日)    v1.30
+1. 新增用户登录日志功能.
+2. 后台单独列表化显示.(点击用户ID即可查询该用户近期10条登录记录,登录IP,时间)
+3. 如删除某用户,该用户的登录日志也会随之删除.
+
+更新内容(2019年7月21日)    v1.20
 1. 验证登录接口动态加解密上线,服务端⇄客户端互通.
 2. 易语言DEMO兼容动态加解密的验证.
 
@@ -66,7 +66,7 @@
 1. 系统设置增加版本号管理.
 2. 系统设置增加DLL上传功能.(保存路径:public\upload\files)
 
-功能介绍(2019年7月15日) v1.00
+功能介绍(2019年7月15日)    v1.00
 1. 用户列表
 2. 充值卡列表
 3. 试用功能，可自定义试用的周期或关闭试用。

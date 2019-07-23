@@ -7,6 +7,7 @@ use Encore\Admin\Controllers\AdminController;
 use Encore\Admin\Form;
 use Encore\Admin\Grid;
 use Encore\Admin\Show;
+use Encore\Admin\Widgets\Table;
 
 class UsersController extends AdminController
 {
@@ -28,10 +29,16 @@ class UsersController extends AdminController
 	    $grid->filter(function ($filter) {
 		    // 禁用id查询框
 		    $filter->disableIdFilter();
-		    $filter->like('key','机器码：');
+		    $filter->like('key','机器码');
 	    });
 	    $grid->model()->orderBy('id', 'desc');
-        $grid->column('id', __('ID'));
+        //$grid->column('id', __('ID'));
+	    $grid->column('id', __('ID'))->expand(function ($model) {
+		    $comments = $model->LoginLog()->take(10)->get()->map(function ($comment) {
+			    return $comment->only(['id', 'user_id', 'ip', 'logindate']);
+		    });
+		    return new Table(['ID', '用户ID', '登录IP','登录时间'], $comments->toArray());
+	    });
         $grid->column('key', __('机器码'));
         $grid->column('ip', __('注册IP'));
         $grid->column('regdate', __('注册日期'));
@@ -69,11 +76,10 @@ class UsersController extends AdminController
         $form = new Form(new UserData);
 
         $form->text('key', __('机器码：'))->rules('required');
-//        $form->ip('ip', __('注册IP：'))->rules('required');
 	    $form->text('ip', __('注册IP：'))->rules('required');
         $form->date('regdate', __('注册日期：'))->default(date('Y-m-d'))->rules('required');
         $form->datetime('enddate', __('到期时间：'))->default(date('Y-m-d H:i:s'))->rules('required');
 
-        return $form;
+	    return $form;
     }
 }

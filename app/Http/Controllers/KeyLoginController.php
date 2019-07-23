@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\LoginLog;
 use App\UserData;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
@@ -84,6 +85,13 @@ class KeyLoginController extends Controller
 		} else {
 			$enddate = $ret -> enddate;
 			if ($enddate > Carbon ::now()) {
+				//写登录日志开始
+				$setlog              = new LoginLog();
+				$setlog -> user_id   = $ret -> id;
+				$setlog -> ip        = getIpPlace(get_client_ip());
+				$setlog -> logindate = Carbon ::now();
+				$setlog -> save();
+				//写登录日志结束
 				$arr = $this -> jiami([
 					'code'   => 1000,
 					'msg'    => '验证成功，到期时间：' . $enddate,
