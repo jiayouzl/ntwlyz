@@ -4,7 +4,7 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
-        <title>速捷网络验证</title>
+        <title>迅捷网络验证</title>
 
         <!-- Fonts -->
         <link href="https://fonts.googleapis.com/css?family=Nunito:200,600" rel="stylesheet">
@@ -81,7 +81,7 @@
 
             <div class="content">
                 <div class="title m-b-md">
-                    欢迎使用速捷网络验证
+                    欢迎使用迅捷网络验证
                 </div>
 
                 <div class="links">

@@ -14,7 +14,7 @@ class Setting extends Form
 	 *
 	 * @var string
 	 */
-	public $title = '网络验证功能设置';
+	public $title = '网络验证功能设置 - 系统配置缓存1分钟后生效';
 
 	/**
 	 * Handle the form request.
@@ -46,13 +46,14 @@ class Setting extends Form
 				//$files = Storage::allFiles('public');
 				//$files = Storage::disk('public')->allFiles();
 				Storage ::disk(config('admin.upload.disk')) -> put(config('admin.upload.directory.file') . '/' . $clientName, file_get_contents($path));
-				$getupname = Storage ::disk(config('admin.upload.disk')) ->url(config('admin.upload.directory.file') . '/' . $clientName);
+				$getupname = Storage ::disk(config('admin.upload.disk')) -> url(config('admin.upload.directory.file') . '/' . $clientName);
 			}
 		}
 
 		$result = DB ::table('setting') -> where('id', 1) -> update([
 			'shifoushiyong' => $request -> shiyong == 'on' ? 1 : 0,
 			'time'          => $request -> time,
+			'quanjujiami'   => $request -> quanjujiami == 'on' ? 1 : 0,
 			'banben'        => $request -> banben,
 			'dlldown'       => isset($getupname) ? $getupname : $request -> dlldown
 		]);
@@ -72,9 +73,10 @@ class Setting extends Form
 	{
 		$this ->switch('shiyong', '开启试用');
 		$this -> number('time', '试用秒数') -> help('86400=1天');
+		$this ->switch('quanjujiami', '开启全局加密输出') -> help('开启后登陆验证接口将已动态解密方式输出');
 		$this -> text('banben', '版本号') -> help('如不需要可留空') -> setWidth(2);
 		$this -> text('dlldown', 'DLL下载地址') -> help('如不需要可留空') -> setWidth(5);
-		$this -> file('file_upload', 'DLL上传') -> help('如需远程调用代码上传DLL,如不需要可留空.')-> setWidth(5);
+		$this -> file('file_upload', 'DLL上传') -> help('如需远程调用代码上传DLL,如不需要可留空.') -> setWidth(5);
 		//        $this->text('name')->rules('required');
 		//        $this->email('email')->rules('email');
 		//        $this->datetime('created_at');
@@ -90,10 +92,11 @@ class Setting extends Form
 	{
 		$result = DB ::table('setting') -> where('id', 1) -> first();
 		return [
-			'shiyong' => $result -> shifoushiyong,
-			'time'    => $result -> time,
-			'banben'  => $result -> banben,
-			'dlldown' => $result -> dlldown
+			'shiyong'     => $result -> shifoushiyong,
+			'time'        => $result -> time,
+			'quanjujiami' => $result -> quanjujiami,
+			'banben'      => $result -> banben,
+			'dlldown'     => $result -> dlldown
 		];
 	}
 }

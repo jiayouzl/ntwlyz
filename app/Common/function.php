@@ -181,8 +181,8 @@ function cardType($type)
 	}
 }
 //Discuz!动态加解密函数authcode之易语言版（PHP动态加密传输）
-function authcode_leilei($string, $operation = 'DECODE', $key = '', $expiry = 0,$test=false) {
-	if ($test === true){
+function authcode_leilei($string, $operation = 'DECODE', $key = '', $expiry = 0,$test=0) {
+	if ($test === 0){
 		return $string;
 	}
 	$ckey_length = 4;

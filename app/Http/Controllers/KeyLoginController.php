@@ -11,34 +11,26 @@ use Illuminate\Support\Facades\DB;
 
 class KeyLoginController extends Controller
 {
+	private $setting;
+
+	public function __construct()
+	{
+		//通过魔术构造方法取系统设置(先读缓存如不存在就读取数据库)
+		$this->setting = Cache ::remember('setting', 600, function () {
+			return DB ::table('setting') -> where('id', 1) -> first();
+		});
+	}
+
 	//加密方法
 	private function jiami($arr = array(), $key)
 	{
 		//将数组已JSON编码,不然数组不支持直接加密
 		$val = json_encode($arr);
-		//test参数设置为false为全局不加密,方便调试.
-		$ret = authcode_leilei($val, 'ENCODE', $key, 88888, false);
+		//test参数设置为true为全局不加密,方便调试.
+		$ret = authcode_leilei($val, 'ENCODE', $key, 88888, $this->setting->quanjujiami);
 		return $ret;
 	}
 
-	/*
-	 * 错误码说明
-	 * 1000 用户未过期验证通过
-	 * 1001 新用户注册成功
-	 * 1002 充值成功
-	 *
-	 * 2000 用户已过期
-	 * 2001 新用户注册失败
-	 * 2002 充值卡号或密码错误
-	 * 2003 充值卡已被使用
-	 * 2004 充值失败
-	 * 2005 需充值的Key不存在
-	 *
-	 * 3000 登录参数错误
-	 * 3001 充值参数错误
-	 *
-	 * 4000 维护中
-	 * */
 	public function login(Request $request)
 	{
 		if (empty($request -> key)) {
@@ -47,25 +39,20 @@ class KeyLoginController extends Controller
 				'msg'  => '参数错误'
 			];
 		}
-		//取系统设置(先读缓存)
-		$setting = Cache ::remember('setting', 5, function () {
-			return DB ::table('setting') -> where('id', 1) -> first();
-		});
-
 		$ret = DB ::table('user_data') -> where('key', $request -> key) -> first();
 		if (empty($ret)) {
 			$db            = new UserData();
 			$db -> key     = $request -> key;
 			$db -> ip      = getIpPlace(get_client_ip());
 			$db -> regdate = Carbon ::now() -> toDateString();
-			if ($setting -> shifoushiyong == '1') {
-				$enddate = Carbon ::now() -> addSeconds($setting -> time);//到期时间后面为当前时间+秒
+			if ($this->setting -> shifoushiyong == '1') {
+				$enddate = Carbon ::now() -> addSeconds($this->setting -> time);//到期时间后面为当前时间+秒
 			} else {
 				$enddate = Carbon ::now();//没有试用就写入当前时间.
 			}
 			$db -> enddate = $enddate;
 			$result        = $db -> save();
-			if ($setting -> shifoushiyong == '1') {
+			if ($this->setting -> shifoushiyong == '1') {
 				return $result ? $this -> jiami([
 					'code' => 1001,
 					'msg'  => '注册成功，到期时间：' . $enddate
@@ -95,8 +82,8 @@ class KeyLoginController extends Controller
 				$arr = $this -> jiami([
 					'code'   => 1000,
 					'msg'    => '验证成功，到期时间：' . $enddate,
-					'banben' => $setting -> banben,
-					'dll'    => $setting -> dlldown
+					'banben' => $this->setting -> banben,
+					'dll'    => $this->setting -> dlldown
 				], $request -> key);
 				return $arr;
 			} else {
