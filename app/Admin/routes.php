@@ -14,4 +14,5 @@ Route::group([
 	$router->resource('cards', CardController::class);
 	$router->get('setting', 'SettingController@setting');
 	$router->get('cardplsc', 'CardzhizuoController@index');
+	$router->get('buchang','BuchangController@index');
 });

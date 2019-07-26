@@ -34,7 +34,7 @@ class UsersController extends AdminController
 	    $grid->model()->orderBy('id', 'desc');
         //$grid->column('id', __('ID'));
 	    $grid->column('id', __('ID'))->expand(function ($model) {
-		    $comments = $model->LoginLog()->take(10)->get()->map(function ($comment) {
+		    $comments = $model->LoginLog()->take(10)->orderBy('id','desc')->get()->map(function ($comment) {
 			    return $comment->only(['id', 'user_id', 'ip', 'logindate']);
 		    });
 		    return new Table(['ID', '用户ID', '登录IP','登录时间'], $comments->toArray());

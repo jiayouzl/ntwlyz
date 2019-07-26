@@ -14,7 +14,7 @@ class Setting extends Form
 	 *
 	 * @var string
 	 */
-	public $title = '网络验证功能设置 - 系统配置缓存1分钟后生效';
+	public $title = '网络验证功能设置—系统配置缓存10分钟后生效';
 
 	/**
 	 * Handle the form request.

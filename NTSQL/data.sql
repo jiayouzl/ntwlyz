@@ -15,24 +15,24 @@ CREATE TABLE `admin_menu` (
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT=13 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=MyISAM AUTO_INCREMENT=14 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- ----------------------------
 -- Records of admin_menu
 -- ----------------------------
 INSERT INTO `admin_menu` VALUES ('1', '0', '1', '后台首页', 'fa-building-o', '/', null, null, '2019-07-13 22:04:34');
-INSERT INTO `admin_menu` VALUES ('2', '0', '5', '管理员设置', 'fa-tasks', null, null, null, '2019-07-14 22:45:11');
-INSERT INTO `admin_menu` VALUES ('3', '2', '6', '管理员', 'fa-users', 'auth/users', null, null, '2019-07-14 22:45:11');
-INSERT INTO `admin_menu` VALUES ('4', '2', '7', '角色设置', 'fa-user', 'auth/roles', null, null, '2019-07-14 22:45:11');
-INSERT INTO `admin_menu` VALUES ('5', '2', '8', '权限设置', 'fa-ban', 'auth/permissions', null, null, '2019-07-14 22:45:11');
-INSERT INTO `admin_menu` VALUES ('6', '2', '9', '菜单设置', 'fa-bars', 'auth/menu', null, null, '2019-07-14 22:45:11');
-INSERT INTO `admin_menu` VALUES ('7', '2', '10', '操作日志', 'fa-history', 'auth/logs', null, null, '2019-07-14 22:45:11');
+INSERT INTO `admin_menu` VALUES ('2', '0', '8', '管理员设置', 'fa-tasks', null, null, null, '2019-07-26 23:21:08');
+INSERT INTO `admin_menu` VALUES ('3', '2', '9', '管理员', 'fa-users', 'auth/users', null, null, '2019-07-26 23:21:08');
+INSERT INTO `admin_menu` VALUES ('4', '2', '10', '角色设置', 'fa-user', 'auth/roles', null, null, '2019-07-26 23:21:08');
+INSERT INTO `admin_menu` VALUES ('5', '2', '11', '权限设置', 'fa-ban', 'auth/permissions', null, null, '2019-07-26 23:21:08');
+INSERT INTO `admin_menu` VALUES ('6', '2', '12', '菜单设置', 'fa-bars', 'auth/menu', null, null, '2019-07-26 23:21:08');
+INSERT INTO `admin_menu` VALUES ('7', '2', '13', '操作日志', 'fa-history', 'auth/logs', null, null, '2019-07-26 23:21:08');
 INSERT INTO `admin_menu` VALUES ('8', '0', '2', '用户与充值卡管理', 'fa-users', '/users', null, '2019-07-13 22:05:31', '2019-07-14 22:43:57');
 INSERT INTO `admin_menu` VALUES ('9', '8', '3', '用户列表', 'fa-user', '/users', null, '2019-07-13 22:06:36', '2019-07-14 22:45:11');
 INSERT INTO `admin_menu` VALUES ('10', '8', '4', '充值卡列表', 'fa-cc-visa', '/cards', null, '2019-07-14 22:44:42', '2019-07-14 22:45:52');
-INSERT INTO `admin_menu` VALUES ('11', '8', '0', '充值卡生成', 'fa-stack-overflow', 'cardplsc', null, '2019-07-14 23:03:22', '2019-07-14 23:03:22');
-INSERT INTO `admin_menu` VALUES ('12', '8', '0', '系统设置', 'fa-th-list', 'setting', null, '2019-07-15 13:05:26', '2019-07-15 13:05:26');
-
+INSERT INTO `admin_menu` VALUES ('11', '8', '5', '充值卡生成', 'fa-stack-overflow', 'cardplsc', null, '2019-07-14 23:03:22', '2019-07-26 23:21:08');
+INSERT INTO `admin_menu` VALUES ('12', '8', '7', '系统设置', 'fa-th-list', 'setting', null, '2019-07-15 13:05:26', '2019-07-26 23:21:08');
+INSERT INTO `admin_menu` VALUES ('13', '8', '6', '批量补偿', 'fa-frown-o', 'buchang', null, '2019-07-26 23:20:58', '2019-07-26 23:21:08');
 -- ----------------------------
 -- Table structure for admin_operation_log
 -- ----------------------------
