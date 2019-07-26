@@ -26,3 +26,10 @@ Route ::get('/login', 'KeyLoginController@login') -> middleware('CheckDebug');
  * Url:http://127.0.0.1:8000/pay?key=12345&card=23115434543&password=123123123
  * */
 Route ::get('/pay','KeyLoginController@pay');
+
+
+//http://127.0.0.1:8000/test/1
+Route::get('test/{id}', function ($id) {
+	$array=['name' => 'Abigail', 'state' => $id];
+	return response()->json($array);
+});
