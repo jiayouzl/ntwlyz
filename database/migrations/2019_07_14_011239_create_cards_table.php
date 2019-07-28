@@ -21,6 +21,7 @@ class CreateCardsTable extends Migration
             $table->tinyInteger('consume');
             $table->string('key')->nullable();
             $table->dateTime('consumetime')->nullable();
+            $table->tinyInteger('beifeng');
         });
     }
 

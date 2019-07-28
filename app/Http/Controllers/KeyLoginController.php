@@ -17,7 +17,7 @@ class KeyLoginController extends Controller
 	{
 		//通过魔术构造方法取系统设置(先读缓存如不存在就读取数据库)
 		$this->setting = Cache ::remember('setting', 600, function () {
-			return DB ::table('setting') -> where('id', 1) -> first();
+			return DB ::table('setting') -> first();
 		});
 	}
 
@@ -127,6 +127,12 @@ class KeyLoginController extends Controller
 					'msg'  => '充值卡号或密码错误'
 				];
 			} else {
+			    if ($retcard->beifeng==1){
+                    return [
+                        'code' => 2006,
+                        'msg'  => '该充值卡被封请于售卡商取得联系.'
+                    ];
+                }
 				if ($retcard -> consume == 1) {
 					return [
 						'code' => 2003,

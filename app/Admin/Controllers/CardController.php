@@ -9,6 +9,8 @@ use Encore\Admin\Controllers\AdminController;
 use Encore\Admin\Form;
 use Encore\Admin\Grid;
 use Encore\Admin\Show;
+use App\Admin\Actions\Post\BatchFengka;
+use App\Admin\Actions\Post\BatchJieFengka;
 
 class CardController extends AdminController
 {
@@ -69,12 +71,25 @@ class CardController extends AdminController
 		}) -> sortable() -> help('点击可排序');
 		$grid -> column('key', __('被充值Key'));
 		$grid -> column('consumetime', __('充值时间')) -> editable('datetime');
+        $grid -> column('beifeng', __('是否被封卡')) -> display(function ($consume) {
+            return $consume == 0 ? '未封卡' : "<span style='color:red'>被封卡</span>";
+        }) -> sortable();
 		//默认为每页20条
 		$grid -> paginate(20);
 		//以EXCEL导出
 		$ExcelExpoter=new ExcelExpoter();
 		$ExcelExpoter->SetName('卡密列表'.Carbon ::now() -> toDateTimeString().'.xlsx');
 		$grid->exporter($ExcelExpoter);
+
+		//批量封卡
+        $grid->batchActions(function ($batch) {
+            $batch->add(new BatchFengka());
+        });
+        //批量解封卡
+        $grid->batchActions(function ($batch){
+            $batch->add(New BatchJieFengka());
+        });
+
 		return $grid;
 	}
 
@@ -95,6 +110,7 @@ class CardController extends AdminController
 		$show -> field('consume', __('是否已充值'));
 		$show -> field('key', __('被充值Key'));
 		$show -> field('consumetime', __('充值时间'));
+        $show -> field('beifeng', __('是否被封'));
 
 		return $show;
 	}
@@ -130,6 +146,11 @@ class CardController extends AdminController
 		$form ->switch('consume', __('是否已充值'))->states($states);
 		$form -> text('key', __('被充值Key'));
 		$form -> datetime('consumetime', __('充值时间'))->default(date('Y-m-d H:i:s'));
+        $states1 = [
+            'on'  => ['value' => 0, 'text' => '未封卡', 'color' => 'success'],
+            'off' => ['value' => 1, 'text' => '被封卡', 'color' => 'danger'],
+        ];
+        $form ->switch('beifeng', __('是否被封'))->states($states1);
 
 		return $form;
 	}

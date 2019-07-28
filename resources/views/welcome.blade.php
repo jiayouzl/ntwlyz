@@ -89,7 +89,7 @@
                 </div>
 
                 <div class="links">
-                    <a href="http://bbs.eyuyan.com" target="_blank">Docs</a>
+                    <a href="https://github.com/jiayouzl/ntwlyz" target="_blank">Docs</a>
                     <a href="https://github.com/jiayouzl/ntwlyz" target="_blank">GitHub仓库</a>
                 </div>
             </div>

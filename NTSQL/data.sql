@@ -202,6 +202,7 @@ CREATE TABLE `cards` (
   `consume` tinyint(4) NOT NULL,
   `key` varchar(191) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `consumetime` datetime DEFAULT NULL,
+  `beifeng` tinyint(4) NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=MyISAM AUTO_INCREMENT=1 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 

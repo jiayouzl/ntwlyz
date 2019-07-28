@@ -52,8 +52,18 @@ class ExampleTest extends TestCase
     public function testbuchang()
     {
         //"UPDATE `user_data` SET `enddate` = date_add(str_to_date(`enddate`,'%Y-%m-%d %H:%i:%s'), interval '{$tianshu}' day) WHERE `enddate` > Now()"
-        $ret =DB::update("UPDATE `user_data` SET `enddate` = date_add(str_to_date(`enddate`,'%Y-%m-%d %H:%i:%s'), interval '1' day) WHERE `enddate` > Now()");
+        $ret = DB ::update("UPDATE `user_data` SET `enddate` = date_add(str_to_date(`enddate`,'%Y-%m-%d %H:%i:%s'), interval '1' day) WHERE `enddate` > Now()");
         dump($ret);
         $this -> assertTrue(true);
+    }
+
+    public function testarr(){
+        $testarr= [1,2,3,4];
+        $arr =[];
+        foreach ($testarr as $value) {
+            $arr[]=$value;
+        }
+        dump($arr);
+        $this->assertTrue(true);
     }
 }
