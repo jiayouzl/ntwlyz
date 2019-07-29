@@ -25,11 +25,11 @@
 5. 配置Laravel所需的伪静态规则。
 
 ## 接口说明
-注册与验证通用接口（GET）[未开启Url签名验证]
-`http://127.0.0.1:8000/login?key={key}`
+注册与验证通用接口（GET）
+`http://127.0.0.1:8000/login?key={key}`[未开启Url签名验证(默认开启)]
 
-注册与验证通用接口（GET）[已开启Url签名验证]该接口返回的值即是签名过的Url
-`http://127.0.0.1:8000/urlsign/{key}`
+注册与验证通用接口（GET）
+`http://127.0.0.1:8000/urlsign/{key}`[已开启Url签名验证]该接口返回的值即是签名过的Url
 
 充值接口（GET）
 `http://127.0.0.1:8000/pay?key={key}&card={card}&password={password}`
