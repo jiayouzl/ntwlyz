@@ -11,15 +11,21 @@
 |
 */
 
+use Carbon\Carbon;
+
+
 Route ::get('/', function () {
     return view('welcome');
 });
 
 /*
  * 注册与验证通用接口
- * Url:http://127.0.0.1:8000/login?key=12345
+ * Url:http://127.0.0.1:8000/login?key=12345(已启用签名,Url必须要签名后才能访问)
  * */
-Route ::get('/login', 'KeyLoginController@login') -> middleware('CheckDebug');
+Route ::get('/login', 'KeyLoginController@login') -> middleware([
+    'CheckDebug',
+    'signedurl'
+]);
 
 /*
  * 充值接口
@@ -27,11 +33,8 @@ Route ::get('/login', 'KeyLoginController@login') -> middleware('CheckDebug');
  * */
 Route ::get('/pay', 'KeyLoginController@pay');
 
-
-//http://127.0.0.1:8000/test/1
-Route ::get('test/{id}', function ($id) {
-    $array = ['name'  => 'Abigail',
-              'state' => $id
-    ];
-    return response() -> json($array);
+//Url签名
+//Url:http://127.0.0.1:8000/urlsign/12345
+Route ::get('urlsign/{key}', function ($key) {
+    return UrlSigner ::sign(env('APP_URL') . '/login?key=' . $key, Carbon ::now() -> addMinutes(120));
 });

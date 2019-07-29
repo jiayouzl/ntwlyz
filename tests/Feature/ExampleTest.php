@@ -7,6 +7,7 @@ use Carbon\Carbon;
 use Illuminate\Support\Facades\DB;
 use Tests\TestCase;
 use Illuminate\Foundation\Testing\RefreshDatabase;
+use UrlSigner;
 
 class ExampleTest extends TestCase
 {
@@ -64,6 +65,17 @@ class ExampleTest extends TestCase
             $arr[]=$value;
         }
         dump($arr);
+        $this->assertTrue(true);
+    }
+
+    public function testurlsign(){
+        dump(UrlSigner::sign(env('APP_URL').'/?key=12345&',Carbon::now()->addMinutes(5)));
+        $this->assertTrue(true);
+    }
+
+    public function testurlvalidate()
+    {
+        dump(UrlSigner::validate('http://localhost:8000/login?key=12345&expires=1564385243&signature=478acea1e8927191bb5ffa5ddf99777e'));
         $this->assertTrue(true);
     }
 }
