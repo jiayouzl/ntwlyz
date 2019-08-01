@@ -255,6 +255,7 @@ CREATE TABLE `setting` (
   `shifoushiyong` int(10) unsigned DEFAULT NULL COMMENT '是否开启试用',
   `time` int(10) unsigned DEFAULT NULL COMMENT '试用时间(秒)',
   `quanjujiami` int(10) unsigned DEFAULT NULL COMMENT '开启全局加密输出',
+  `urlsign` int(10) unsigned DEFAULT NULL COMMENT '开启登录验证URL签名',
   `banben` varchar(191) COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT '软件版本',
   `dlldown` varchar(191) COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT 'DLL路径',
   PRIMARY KEY (`id`)
@@ -263,7 +264,7 @@ CREATE TABLE `setting` (
 -- ----------------------------
 -- Records of setting
 -- ----------------------------
-INSERT INTO `setting` VALUES ('1', '1', '86400', '0', '', '');
+INSERT INTO `setting` VALUES ('1', '1', '86400', '0','0', '', '');
 
 -- ----------------------------
 -- Table structure for users

@@ -18,6 +18,7 @@ class CreateSettingTable extends Migration
 	        $table->integer('shifoushiyong',false,true)->comment('是否开启试用')->nullable();
 	        $table->integer('time',false,true)->comment('试用时间(秒)')->nullable();
 	        $table->integer('quanjujiami',false,true)->comment('开启全局加密输出')->nullable();
+            $table->integer('urlsign',false,true)->comment('开启登录验证URL签名')->nullable();
 	        $table->string('banben')->comment('软件版本')->nullable();
 	        $table->string('dlldown')->comment('DLL路径')->nullable();
         });

@@ -58,24 +58,38 @@ class ExampleTest extends TestCase
         $this -> assertTrue(true);
     }
 
-    public function testarr(){
-        $testarr= [1,2,3,4];
-        $arr =[];
+    public function testarr()
+    {
+        $testarr = [
+            1,
+            2,
+            3,
+            4
+        ];
+        $arr     = [];
         foreach ($testarr as $value) {
-            $arr[]=$value;
+            $arr[] = $value;
         }
         dump($arr);
-        $this->assertTrue(true);
+        $this -> assertTrue(true);
     }
 
-    public function testurlsign(){
-        dump(UrlSigner::sign(env('APP_URL').'/?key=12345&',Carbon::now()->addMinutes(5)));
-        $this->assertTrue(true);
+    public function testurlsign()
+    {
+        dump(UrlSigner ::sign(env('APP_URL') . '/?key=12345&', Carbon ::now() -> addMinutes(5)));
+        $this -> assertTrue(true);
     }
 
     public function testurlvalidate()
     {
-        dump(UrlSigner::validate('http://localhost:8000/login?key=12345&expires=1564385243&signature=478acea1e8927191bb5ffa5ddf99777e'));
-        $this->assertTrue(true);
+        dump(UrlSigner ::validate('http://localhost:8000/login?key=12345&expires=1564513047&signature=478acea1e8927191bb5ffa5ddf99777e'));
+        $this -> assertTrue(true);
+    }
+
+    public function testqujianketianshu()
+    {
+        $date = carbon ::parse('2019-07-13 00:46:28');// 格式化一个时间日期字符串为 carbon 对象
+        dump(Carbon ::now() -> diffInDays($date,true));
+        $this -> assertTrue(true);
     }
 }
