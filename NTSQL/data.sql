@@ -15,24 +15,29 @@ CREATE TABLE `admin_menu` (
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT=14 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=MyISAM AUTO_INCREMENT=18 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- ----------------------------
 -- Records of admin_menu
 -- ----------------------------
 INSERT INTO `admin_menu` VALUES ('1', '0', '1', '后台首页', 'fa-building-o', '/', null, null, '2019-07-13 22:04:34');
-INSERT INTO `admin_menu` VALUES ('2', '0', '8', '管理员设置', 'fa-tasks', null, null, null, '2019-07-26 23:21:08');
-INSERT INTO `admin_menu` VALUES ('3', '2', '9', '管理员', 'fa-users', 'auth/users', null, null, '2019-07-26 23:21:08');
-INSERT INTO `admin_menu` VALUES ('4', '2', '10', '角色设置', 'fa-user', 'auth/roles', null, null, '2019-07-26 23:21:08');
-INSERT INTO `admin_menu` VALUES ('5', '2', '11', '权限设置', 'fa-ban', 'auth/permissions', null, null, '2019-07-26 23:21:08');
-INSERT INTO `admin_menu` VALUES ('6', '2', '12', '菜单设置', 'fa-bars', 'auth/menu', null, null, '2019-07-26 23:21:08');
-INSERT INTO `admin_menu` VALUES ('7', '2', '13', '操作日志', 'fa-history', 'auth/logs', null, null, '2019-07-26 23:21:08');
-INSERT INTO `admin_menu` VALUES ('8', '0', '2', '用户与充值卡管理', 'fa-users', '/users', null, '2019-07-13 22:05:31', '2019-07-14 22:43:57');
+INSERT INTO `admin_menu` VALUES ('2', '0', '11', '管理员设置', 'fa-tasks', null, null, null, '2019-08-01 23:03:52');
+INSERT INTO `admin_menu` VALUES ('3', '2', '12', '管理员', 'fa-users', 'auth/users', null, null, '2019-08-01 23:03:52');
+INSERT INTO `admin_menu` VALUES ('4', '2', '13', '角色设置', 'fa-user', 'auth/roles', null, null, '2019-08-01 23:03:52');
+INSERT INTO `admin_menu` VALUES ('5', '2', '14', '权限设置', 'fa-ban', 'auth/permissions', null, null, '2019-08-01 23:03:52');
+INSERT INTO `admin_menu` VALUES ('6', '2', '15', '菜单设置', 'fa-bars', 'auth/menu', null, null, '2019-08-01 23:03:52');
+INSERT INTO `admin_menu` VALUES ('7', '2', '16', '操作日志', 'fa-history', 'auth/logs', null, null, '2019-08-01 23:03:52');
+INSERT INTO `admin_menu` VALUES ('8', '0', '2', '用户管理', 'fa-users', '/users', null, '2019-07-13 22:05:31', '2019-08-01 23:01:41');
 INSERT INTO `admin_menu` VALUES ('9', '8', '3', '用户列表', 'fa-user', '/users', null, '2019-07-13 22:06:36', '2019-07-14 22:45:11');
-INSERT INTO `admin_menu` VALUES ('10', '8', '4', '充值卡列表', 'fa-cc-visa', '/cards', null, '2019-07-14 22:44:42', '2019-07-14 22:45:52');
-INSERT INTO `admin_menu` VALUES ('11', '8', '5', '充值卡生成', 'fa-stack-overflow', 'cardplsc', null, '2019-07-14 23:03:22', '2019-07-26 23:21:08');
-INSERT INTO `admin_menu` VALUES ('12', '8', '7', '系统设置', 'fa-th-list', 'setting', null, '2019-07-15 13:05:26', '2019-07-26 23:21:08');
-INSERT INTO `admin_menu` VALUES ('13', '8', '6', '批量补偿', 'fa-frown-o', 'buchang', null, '2019-07-26 23:20:58', '2019-07-26 23:21:08');
+INSERT INTO `admin_menu` VALUES ('10', '15', '6', '充值卡列表', 'fa-cc-visa', '/cards', null, '2019-07-14 22:44:42', '2019-08-01 23:03:52');
+INSERT INTO `admin_menu` VALUES ('11', '15', '7', '充值卡生成', 'fa-stack-overflow', 'cardplsc', null, '2019-07-14 23:03:22', '2019-08-01 23:03:52');
+INSERT INTO `admin_menu` VALUES ('12', '16', '10', '系统设置', 'fa-th-list', 'setting', null, '2019-07-15 13:05:26', '2019-08-01 23:03:52');
+INSERT INTO `admin_menu` VALUES ('13', '16', '9', '批量补偿', 'fa-frown-o', 'buchang', null, '2019-07-26 23:20:58', '2019-08-01 23:03:52');
+INSERT INTO `admin_menu` VALUES ('14', '8', '4', '用户登录日志', 'fa-indent', 'LoginLogs', null, '2019-08-01 22:37:17', '2019-08-01 22:37:26');
+INSERT INTO `admin_menu` VALUES ('15', '0', '5', '充值卡管理', 'fa-credit-card', null, null, '2019-08-01 23:02:02', '2019-08-01 23:03:52');
+INSERT INTO `admin_menu` VALUES ('16', '0', '8', '系统设置', 'fa-list-alt', null, null, '2019-08-01 23:03:37', '2019-08-01 23:03:52');
+INSERT INTO `admin_menu` VALUES ('17', '8', '0', '用户授权转移日志', 'fa-refresh', 'replacelogs', null, '2019-08-02 12:52:54', '2019-08-02 12:52:54');
+
 -- ----------------------------
 -- Table structure for admin_operation_log
 -- ----------------------------
@@ -207,8 +212,16 @@ CREATE TABLE `cards` (
 ) ENGINE=MyISAM AUTO_INCREMENT=1 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- ----------------------------
--- Records of cards
+-- Table structure for login_logs
 -- ----------------------------
+DROP TABLE IF EXISTS `login_logs`;
+CREATE TABLE `login_logs` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `user_id` int(10) unsigned NOT NULL COMMENT '用户ID',
+  `ip` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL COMMENT 'ip地址',
+  `logindate` datetime NOT NULL COMMENT '登录时间',
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM AUTO_INCREMENT=1 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- ----------------------------
 -- Table structure for migrations
@@ -219,7 +232,7 @@ CREATE TABLE `migrations` (
   `migration` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
   `batch` int(11) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT=11 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=MyISAM AUTO_INCREMENT=15 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- ----------------------------
 -- Records of migrations
@@ -230,6 +243,8 @@ INSERT INTO `migrations` VALUES ('3', '2019_07_12_234016_create_user_data_table'
 INSERT INTO `migrations` VALUES ('4', '2016_01_04_173148_create_admin_tables', '2');
 INSERT INTO `migrations` VALUES ('6', '2019_07_14_011239_create_cards_table', '3');
 INSERT INTO `migrations` VALUES ('10', '2019_07_15_132240_create_setting_table', '4');
+INSERT INTO `migrations` VALUES ('13', '2019_07_23_204526_create_login_logs_table', '5');
+INSERT INTO `migrations` VALUES ('14', '2019_08_02_113817_create_replace_logs_table', '6');
 
 -- ----------------------------
 -- Table structure for password_resets
@@ -247,6 +262,19 @@ CREATE TABLE `password_resets` (
 -- ----------------------------
 
 -- ----------------------------
+-- Table structure for replace_logs
+-- ----------------------------
+DROP TABLE IF EXISTS `replace_logs`;
+CREATE TABLE `replace_logs` (
+  `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
+  `key1` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL COMMENT '被转绑的机器码',
+  `key2` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL COMMENT '待转绑的机器码',
+  `day` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL COMMENT '转移天数',
+  `replacetime` datetime NOT NULL COMMENT '操作时间',
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM AUTO_INCREMENT=1 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- ----------------------------
 -- Table structure for setting
 -- ----------------------------
 DROP TABLE IF EXISTS `setting`;
@@ -259,12 +287,7 @@ CREATE TABLE `setting` (
   `banben` varchar(191) COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT '软件版本',
   `dlldown` varchar(191) COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT 'DLL路径',
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-
--- ----------------------------
--- Records of setting
--- ----------------------------
-INSERT INTO `setting` VALUES ('1', '1', '86400', '0','0', '', '');
+) ENGINE=MyISAM AUTO_INCREMENT=1 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- ----------------------------
 -- Table structure for users
@@ -300,23 +323,3 @@ CREATE TABLE `user_data` (
   PRIMARY KEY (`id`),
   UNIQUE KEY `user_data_key_unique` (`key`)
 ) ENGINE=MyISAM AUTO_INCREMENT=1 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-
--- ----------------------------
--- Records of user_data
--- ----------------------------
-
--- ----------------------------
--- Table structure for login_logs
--- ----------------------------
-DROP TABLE IF EXISTS `login_logs`;
-CREATE TABLE `login_logs` (
-  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
-  `user_id` int(10) unsigned NOT NULL COMMENT '用户ID',
-  `ip` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL COMMENT 'ip地址',
-  `logindate` datetime NOT NULL COMMENT '登录时间',
-  PRIMARY KEY (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT=1 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-
--- ----------------------------
--- Records of login_logs
--- ----------------------------

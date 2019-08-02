@@ -14,4 +14,9 @@ class LoginLog extends Model
 	 * @var bool
 	 */
 	public $timestamps = false;
+
+	//关联1对1模型,来实现通过用户ID获取用户表中对应的Key与其他数据
+    public function User_Loginlog(){
+        return $this->belongsTo('App\UserData','user_id','id');
+    }
 }

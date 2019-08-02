@@ -11,6 +11,8 @@ Route::group([
 ], function (Router $router) {
     $router->get('/', 'HomeController@index')->name('admin.home');
 	$router->resource('users', UsersController::class);
+    $router->resource('LoginLogs', LoginLogController::class);
+    $router->resource('replacelogs', ReplaceLogController::class);
 	$router->resource('cards', CardController::class);
 	$router->get('setting', 'SettingController@setting');
 	$router->get('cardplsc', 'CardzhizuoController@index');

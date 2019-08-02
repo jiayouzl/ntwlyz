@@ -14,7 +14,7 @@ class CreateLoginLogsTable extends Migration
     public function up()
     {
         Schema::create('login_logs', function (Blueprint $table) {
-	        $table->increments('id');
+	        $table->bigIncrements('id');
 	        $table->unsignedInteger('user_id')->comment('用户ID');
 	        $table->string('ip')->comment('ip地址');
 	        $table->dateTime('logindate')->comment('登录时间');

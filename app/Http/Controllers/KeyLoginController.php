@@ -189,4 +189,78 @@ class KeyLoginController extends Controller
             }
         }
     }
+
+    public function replace(Request $request)
+    {
+        if (!$request -> key1 || !$request -> key2) {
+            return [
+                'code' => 3003,
+                'msg'  => '授权转绑参数错误'
+            ];
+        }
+        $key1 = $request -> key1;
+        $key2 = $request -> key2;
+        if ($key1 === $key2) {
+            return [
+                'code' => 2011,
+                'msg'  => '被转与待转机器码不可重复'
+            ];
+        }
+        $ret_key1 = DB ::table('user_data') -> where('key', $key1) -> first();
+        $ret_key2 = DB ::table('user_data') -> where('key', $key2) -> first();
+        if (empty($ret_key1)) {
+            return [
+                'code' => 2009,
+                'msg'  => '被转绑的机器码不存在'
+            ];
+        }
+        if (empty($ret_key2)) {
+            return [
+                'code' => 2010,
+                'msg'  => '待转绑的机器码不存在'
+            ];
+        }
+        $ret_key1_edddate_day = Carbon ::now() -> diffInDays(carbon ::parse($ret_key1 -> enddate), true);
+        if ($ret_key1_edddate_day < 3) {
+            return [
+                'code' => 2007,
+                'msg'  => '被转绑的机器码有效期小于3天无法转绑'
+            ];
+        }
+        $ret_key1_replace_day = DB ::table('replace_logs') -> where('key1', $ret_key1 -> key) -> orderBy('id', 'desc') -> first('replacetime');
+        if (empty($ret_key1_replace_day) || Carbon ::now() -> diffInDays(Carbon ::parse($ret_key1_replace_day -> replacetime), true) >= 30) {
+            $up_key1 = DB ::table('user_data') -> where('key', $key1) -> update(['enddate' => Carbon ::now()]);
+
+            $nowdate = Carbon ::now() -> toDateTimeString();
+            if ($nowdate > $ret_key2 -> enddate) {
+                $newdate = Carbon ::parse($nowdate) -> addDays($ret_key1_edddate_day);
+            } else {
+                $newdate = Carbon ::parse($ret_key2 -> enddate) -> addDays($ret_key1_edddate_day);
+            }
+
+            $up_key2 = DB ::table('user_data') -> where('key', $key2) -> update([
+                'enddate' => $newdate
+            ]);
+
+            $set_log = DB ::table('replace_logs') -> insert([
+                'key1'        => $ret_key1 -> key,
+                'key2'        => $ret_key2 -> key,
+                'day'         => $ret_key1_edddate_day,
+                'replacetime' => Carbon ::now()
+            ]);
+
+            if (!empty($up_key1) && !empty($up_key2) && !empty($set_log)) {
+                return [
+                    'code' => 1003,
+                    'msg'  => '授权转绑成功'
+                ];
+            }
+
+        } else {
+            return [
+                'code' => 2008,
+                'msg'  => '被转绑的机器码冷却时间小于30天无法转绑'
+            ];
+        }
+    }
 }

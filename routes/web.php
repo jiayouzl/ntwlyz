@@ -28,6 +28,12 @@ Route ::get('/login', 'KeyLoginController@login') -> middleware(['CheckDebug']);
 Route ::get('/pay', 'KeyLoginController@pay');
 
 /*
+ * 授权转移
+ * Url:http://127.0.0.1:8000/replace?key1=12345&key2=11111
+ */
+Route::get('/replace','KeyLoginController@replace');
+
+/*
  * URL签名
  * Url:http://127.0.0.1:8000/urlsign?key=12345
  */
