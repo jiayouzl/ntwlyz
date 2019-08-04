@@ -30,19 +30,19 @@
 ## 接口说明
 
 注册与验证通用接口（GET）
-`http://127.0.0.1:8000/login?key={key}`[未开启Url签名验证(默认开启)]
+`http://name.app/rules/login?key={key}`[未开启Url签名验证(默认开启)]
 
 注册与验证通用接口（GET）
-`http://127.0.0.1:8000/urlsign?key={key}`[已开启Url签名验证]该接口返回的值即是签名过的Url
+`http://name.app/rules/urlsign?key={key}`[已开启Url签名验证]该接口返回的值即是签名过的Url
 
 充值接口（GET）
-`http://127.0.0.1:8000/pay?key={key}&card={card}&password={password}`
+`http://name.app/rules/pay?key={key}&card={card}&password={password}`
 
 授权转绑接口(GET)
-`http://127.0.0.1:8000/replace?key1={key1}&key2={key2}`
+`http://name.app/rules/replace?key1={key1}&key2={key2}`
 
 管理后台(name:admin,password:admin)
-`http://127.0.0.1:8000/admin`
+`http://name.app/admin`
 
 ## 返回码说明
 
@@ -63,15 +63,21 @@
 * 2009 被转绑的机器码不存在
 * 2010 待转绑的机器码不存在
 * 2011 被转与待转机器码不可重复
+* 2012 授权转移功能未开启
 * 
 * 3000 登录参数错误
 * 3001 充值参数错误
 * 3002 URL签名认证失败
 * 3003 授权转绑参数错误
 * 
-* 4000 系统维护中
+* 4000 维护中请稍后在重试。
 
 ## 更新日志
+
+更新内容(2019年8月4日)      v1.61
+1. 由于接口慢慢变多了,原先的单独路由改用路由组进行管理.
+2. 后台增加是否开启授权转移开关.
+3. 增加关闭授权转移的返回码.
 
 更新内容(2019年8月2日)      v1.60
 1. 调整后台菜单分类.

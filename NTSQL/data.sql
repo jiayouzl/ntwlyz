@@ -284,10 +284,15 @@ CREATE TABLE `setting` (
   `time` int(10) unsigned DEFAULT NULL COMMENT '试用时间(秒)',
   `quanjujiami` int(10) unsigned DEFAULT NULL COMMENT '开启全局加密输出',
   `urlsign` int(10) unsigned DEFAULT NULL COMMENT '开启登录验证URL签名',
+  `replace` int(10) unsigned DEFAULT NULL COMMENT '开启授权转移功能',
   `banben` varchar(191) COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT '软件版本',
   `dlldown` varchar(191) COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT 'DLL路径',
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT=1 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=MyISAM AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+-- ----------------------------
+-- Records of setting
+-- ----------------------------
+INSERT INTO `setting` VALUES ('1', '1', '86400', '1', '0', '1', '1', '1.1', '');
 
 -- ----------------------------
 -- Table structure for users

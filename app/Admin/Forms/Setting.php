@@ -55,6 +55,7 @@ class Setting extends Form
             'time'          => $request -> time,
             'quanjujiami'   => $request -> quanjujiami == 'on' ? 1 : 0,
             'urlsign'       => $request -> urlsign == 'on' ? 1 : 0,
+            'replace'       => $request -> replace == 'on' ? 1 : 0,
             'banben'        => $request -> banben,
             'dlldown'       => isset($getupname) ? $getupname : $request -> dlldown
         ]);
@@ -76,6 +77,7 @@ class Setting extends Form
         $this -> number('time', '试用秒数') -> help('86400=1天');
         $this ->switch('quanjujiami', '开启全局加密输出') -> help('开启后登陆验证接口将已动态解密方式输出');
         $this ->switch('urlsign', '开启登录验证URL签名')->help('开启后注册与验证通用接口需要进行URL签名');
+        $this ->switch('replace', '开启授权转移')->help('开启后用户可通过授权转移接口进行自行授权转移');
         $this -> text('banben', '版本号') -> help('如不需要可留空') -> setWidth(2);
         $this -> text('dlldown', 'DLL下载地址') -> help('如不需要可留空') -> setWidth(5);
         $this -> file('file_upload', 'DLL上传') -> help('如需远程调用代码上传DLL,如不需要可留空.') -> setWidth(5);
@@ -98,6 +100,7 @@ class Setting extends Form
             'time'        => $result -> time,
             'quanjujiami' => $result -> quanjujiami,
             'urlsign'     => $result -> urlsign,
+            'replace'     => $result -> replace,
             'banben'      => $result -> banben,
             'dlldown'     => $result -> dlldown
         ];

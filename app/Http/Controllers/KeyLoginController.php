@@ -23,6 +23,11 @@ class KeyLoginController extends Controller
         });
     }
 
+    //显示首页
+    public function index(){
+        return view('welcome');
+    }
+
     //加密方法
     private function jiami($arr = array(), $key)
     {
@@ -36,9 +41,10 @@ class KeyLoginController extends Controller
     //URL签名
     public function urlsign(Request $request)
     {
-        return UrlSigner ::sign(env('APP_URL') . '/login?key=' . $request -> key, Carbon ::now() -> addMinutes(120));
+        return UrlSigner ::sign(env('APP_URL') . '/rules/login?key=' . $request -> key, Carbon ::now() -> addMinutes(120));
     }
 
+    //注册,登录验证通用接口
     public function login(Request $request)
     {
         if (empty($request -> key)) {
@@ -62,14 +68,14 @@ class KeyLoginController extends Controller
             $db -> key     = $request -> key;
             $db -> ip      = getIpPlace(get_client_ip());
             $db -> regdate = Carbon ::now() -> toDateString();
-            if ($this -> setting -> shifoushiyong == '1') {
+            if ($this -> setting -> shifoushiyong === 1) {
                 $enddate = Carbon ::now() -> addSeconds($this -> setting -> time);//到期时间后面为当前时间+秒
             } else {
                 $enddate = Carbon ::now();//没有试用就写入当前时间.
             }
             $db -> enddate = $enddate;
             $result        = $db -> save();
-            if ($this -> setting -> shifoushiyong == '1') {
+            if ($this -> setting -> shifoushiyong === 1) {
                 return $result ? $this -> jiami([
                     'code' => 1001,
                     'msg'  => '注册成功，到期时间：' . $enddate
@@ -113,6 +119,7 @@ class KeyLoginController extends Controller
         }
     }
 
+    //充值接口
     public function pay(Request $request)
     {
         if (!$request -> key || !$request -> card || !$request -> password) {
@@ -190,12 +197,19 @@ class KeyLoginController extends Controller
         }
     }
 
+    //授权转移
     public function replace(Request $request)
     {
         if (!$request -> key1 || !$request -> key2) {
             return [
                 'code' => 3003,
                 'msg'  => '授权转绑参数错误'
+            ];
+        }
+        if ($this -> setting -> replace === 0) {
+            return [
+                'code' => 2012,
+                'msg'  => '授权转移功能未开启'
             ];
         }
         $key1 = $request -> key1;
