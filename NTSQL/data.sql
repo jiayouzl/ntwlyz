@@ -289,10 +289,11 @@ CREATE TABLE `setting` (
   `dlldown` varchar(191) COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT 'DLL路径',
   PRIMARY KEY (`id`)
 ) ENGINE=MyISAM AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
 -- ----------------------------
 -- Records of setting
 -- ----------------------------
-INSERT INTO `setting` VALUES ('1', '1', '86400', '1', '0', '1', '1', '1.1', '');
+INSERT INTO `setting` VALUES ('1', '1', '86400', '1', '1', '1', '1.1', '');
 
 -- ----------------------------
 -- Table structure for users

@@ -9,7 +9,7 @@
 1. PHP 7.1.30
 2. Laravel 5.8.29（最低需要PHP7.1.03）
 3. MySQL 5.5.53
-4. Windows 10 Pro 1803
+4. Windows 10 Pro 1903
 
 ## Ntwlyz后续计划
 
@@ -74,6 +74,9 @@
 
 ## 更新日志
 
+更新内容(2019年8月7日)      v1.62
+1. 有用户反映Sql文件有问题对此更新.
+
 更新内容(2019年8月4日)      v1.61
 1. 由于接口慢慢变多了,原先的单独路由改用路由组进行管理.
 2. 后台增加是否开启授权转移开关.
@@ -135,5 +138,6 @@
 
 ## 关于作者
 
-* Email:(jiayouzl#vip.qq.com, 把#换成@)
-* Telegram:[https://t.me/hzleilei](https://t.me/hzleilei)
+* Email：(jiayouzl#vip.qq.com, 把#换成@)
+* QQ群：20051836
+* Telegram：[https://t.me/hzleilei](https://t.me/hzleilei)
