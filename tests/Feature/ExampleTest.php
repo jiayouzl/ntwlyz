@@ -88,7 +88,15 @@ class ExampleTest extends TestCase
     public function testqujianketianshu()
     {
         $date = carbon ::parse('2019-07-13 00:46:28');// 格式化一个时间日期字符串为 carbon 对象
-        dump(Carbon ::now() -> diffInDays($date,true));
+        dump(Carbon ::now() -> diffInDays($date, true));
+        $this -> assertTrue(true);
+    }
+
+    public function testyanzheng()
+    {
+        $val    = '36bbc9cafe2ed2168721b6f33a4ec9a5';
+        $resule = is_numandlitter($val, 32);
+        dump($resule);
         $this -> assertTrue(true);
     }
 }

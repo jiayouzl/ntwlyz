@@ -24,7 +24,8 @@ class KeyLoginController extends Controller
     }
 
     //显示首页
-    public function index(){
+    public function index()
+    {
         return view('welcome');
     }
 
@@ -41,7 +42,8 @@ class KeyLoginController extends Controller
     //URL签名
     public function urlsign(Request $request)
     {
-        return UrlSigner ::sign(env('APP_URL') . '/rules/login?key=' . $request -> key, Carbon ::now() -> addMinutes(120));
+        //env('APP_URL')有坑,要用config('app.url')
+        return UrlSigner ::sign(config('app.url') . '/rules/login?key=' . $request -> key, Carbon ::now() -> addMinutes(120));
     }
 
     //注册,登录验证通用接口
@@ -61,6 +63,12 @@ class KeyLoginController extends Controller
                     'msg'  => 'URL签名认证失败'
                 ];
             }
+        }
+        if (is_numandlitter($request -> key, 32) == false) {
+            return [
+                'code' => 3004,
+                'msg'  => '机器码格式错误'
+            ];
         }
         $ret = DB ::table('user_data') -> where('key', $request -> key) -> first();
         if (empty($ret)) {

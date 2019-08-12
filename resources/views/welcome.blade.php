@@ -85,11 +85,10 @@
                 </div>
 
                 <div class="links">
-                    QQ群：20051836
+                    <a href="//shang.qq.com/wpa/qunwpa?idkey=ce42ddaaf09218e893e618e0ab42c4714a4446a807b9fbf27bd834a40c7bc768" target="_blank">QQ群：20051836</a>
                 </div>
 
                 <div class="links">
-                    <a href="https://github.com/jiayouzl/ntwlyz" target="_blank">Docs</a>
                     <a href="https://github.com/jiayouzl/ntwlyz" target="_blank">GitHub仓库</a>
                 </div>
             </div>
