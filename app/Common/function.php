@@ -39,56 +39,6 @@ function get_client_ip($type = 0)
     return $ip[$type];
 }
 
-//自用的动态解解密
-function authcode($string, $operation = 'DECODE', $key = '', $expiry = 0)
-{
-    $ckey_length = 4;
-    $key         = md5($key != '' ? $key : C('AUTH_KEY'));
-    $keya        = md5(substr($key, 0, 16));
-    $keyb        = md5(substr($key, 16, 16));
-    $keyc        = $ckey_length ? ($operation == 'DECODE' ? substr($string, 0, $ckey_length) : substr(md5(microtime()), -$ckey_length)) : '';
-
-    $cryptkey   = $keya . md5($keya . $keyc);
-    $key_length = strlen($cryptkey);
-
-    $string        = $operation == 'DECODE' ? base64_decode(substr($string, $ckey_length)) : sprintf('%010d', $expiry ? $expiry + time() : 0) . substr(md5($string . $keyb), 0, 16) . $string;
-    $string_length = strlen($string);
-
-    $result = '';
-    $box    = range(0, 255);
-
-    $rndkey = array();
-    for ($i = 0; $i <= 255; $i++) {
-        $rndkey[$i] = ord($cryptkey[$i % $key_length]);
-    }
-
-    for ($j = $i = 0; $i < 256; $i++) {
-        $j       = ($j + $box[$i] + $rndkey[$i]) % 256;
-        $tmp     = $box[$i];
-        $box[$i] = $box[$j];
-        $box[$j] = $tmp;
-    }
-
-    for ($a = $j = $i = 0; $i < $string_length; $i++) {
-        $a       = ($a + 1) % 256;
-        $j       = ($j + $box[$a]) % 256;
-        $tmp     = $box[$a];
-        $box[$a] = $box[$j];
-        $box[$j] = $tmp;
-        $result  .= chr(ord($string[$i]) ^ ($box[($box[$a] + $box[$j]) % 256]));
-    }
-
-    if ($operation == 'DECODE') {
-        if ((substr($result, 0, 10) == 0 || substr($result, 0, 10) - time() > 0) && substr($result, 10, 16) == substr(md5(substr($result, 26) . $keyb), 0, 16)) {
-            return substr($result, 26);
-        } else {
-            return '';
-        }
-    } else {
-        return $keyc . str_replace('=', '', base64_encode($result));
-    }
-}
-
 /**************************************************************
  *
  * 将数组转换为JSON字符串（兼容中文）
@@ -188,7 +138,7 @@ function authcode_leilei($string, $operation = 'DECODE', $key = '', $expiry = 0,
         return $string;
     }
     $ckey_length = 4;
-    $key         = md5($key != '' ? $key : env('APP_KEY'));
+    $key         = md5($key != '' ? $key : config('APP_KEY','12345'));
     $keya        = md5(substr($key, 0, 16));
     $keyb        = md5(substr($key, 16, 16));
     $keyc        = $ckey_length ? ($operation == 'DECODE' ? substr($string, 0, $ckey_length) : substr(md5(microtime()), -$ckey_length)) : '';
@@ -234,10 +184,12 @@ function authcode_leilei($string, $operation = 'DECODE', $key = '', $expiry = 0,
     }
 }
 
-/*
-检测文本长度是否超预设
-检测文本是否为纯数字或英文或数字加英文,其他都返回假
-*/
+/**
+ * 检测文本是否符合规定
+ * @param     $string
+ * @param int $num
+ * @return bool
+ */
 function is_numandlitter($string, $num = 32)
 {
     if (strlen($string) > $num) {

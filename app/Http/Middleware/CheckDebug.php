@@ -15,7 +15,7 @@ class CheckDebug
 	 */
 	public function handle($request, Closure $next)
 	{
-		if (env('DEBUG') == 'true') {
+		if (config('DEBUG') == 'true') {
 			$arr = [
 				'code' => 4000,
 				'msg'  => '维护中请稍后在重试。'
