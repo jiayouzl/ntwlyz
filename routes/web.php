@@ -8,7 +8,7 @@ Route ::group([
     'middleware' => 'CheckDebug'
 ], function (Router $route) {
     //注册与验证通用接口
-    //Url:http://127.0.0.1:8000/rules/login?key=12345(已启用签名,Url必须要签名后才能访问)
+    //Url:http://127.0.0.1:8000/rules/login?key=12345 (已启用签名,Url必须要签名后才能访问)
     $route->get('login','KeyLoginController@login');
     //充值接口
     //Url:http://127.0.0.1:8000/rules/pay?key=12345&card=23115434543&password=123123123

@@ -27,7 +27,7 @@ function get_client_ip($type = 0)
     } else if (isset($_SERVER['REMOTE_ADDR'])) {
         $ip = $_SERVER['REMOTE_ADDR'];
     }
-    // IP地址合法验证
+    //IP地址合法验证
     $long = sprintf("%u", ip2long($ip));
     $ip   = $long ? array(
         $ip,
